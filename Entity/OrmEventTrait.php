@@ -3,130 +3,113 @@
 namespace Toiba\FullCalendarBundle\Entity;
 
 use DateTime;
+use Doctrine\ORM\Mapping as ORM;
 
-class Event implements EventInterface
+trait OrmEventTrait
 {
     /**
-     * @var integer
-     */
-    protected $id;
-
-    /**
      * @var string
+     * @ORM\Column(type="string")
      */
     protected $title;
 
     /**
      * @var boolean
+     * @ORM\Column(type="boolean")
      */
     protected $allDay = true;
 
     /**
      * @var DateTime
+     * @ORM\Column(type="datetime")
      */
     protected $startDate;
 
     /**
      * @var DateTime
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $endDate;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $url;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $className;
 
     /**
      * @var boolean
+     * @ORM\Column(type="boolean")
+     *
      */
     protected $editable = false;
 
     /**
      * @var boolean
+     * @ORM\Column(type="boolean")
      */
     protected $startEditable = false;
 
     /**
      * @var boolean
+     * @ORM\Column(type="boolean")
      */
     protected $durationEditable = false;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $rendering;
 
     /**
      * @var boolean
+     * @ORM\Column(type="boolean")
      */
     protected $overlap = true;
 
     /**
      * @var integer
+     * @ORM\Column(name="constraint_field", type="integer", nullable=true)
      */
     protected $constraint;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $source;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=true)
+     *
      */
     protected $color;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $backgroundColor;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $textColor;
 
     /**
      * @var array
+     * @ORM\Column(type="array")
      */
     protected $customFields = [];
-
-    /**
-     * @param string $title
-     * @param DateTime $start
-     * @param DateTime $end
-     */
-    public function __construct($title, DateTime $start, DateTime $end = null)
-    {
-        $this->title = $title;
-        $this->startDate = $start;
-
-        if (null !== $end) {
-            $this->endDate = $end;
-            $this->allDay = false;
-        }
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return string
@@ -187,7 +170,7 @@ class Event implements EventInterface
     /**
      * @param DateTime $endDate
      */
-    public function setEndDate(DateTime $endDate)
+    public function setEndDate($endDate)
     {
         $this->endDate = $endDate;
     }

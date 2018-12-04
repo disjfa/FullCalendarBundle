@@ -2,20 +2,22 @@
 
 namespace Toiba\FullCalendarBundle\Event;
 
+use Datetime;
 use Toiba\FullCalendarBundle\Entity\Event;
 use Symfony\Component\EventDispatcher\Event as EventDispatcher;
+use Toiba\FullCalendarBundle\Entity\EventInterface;
 
 class CalendarEvent extends EventDispatcher
 {
     const SET_DATA = 'fullcalendar.set_data';
 
     /**
-     * @var \Datetime
+     * @var Datetime
      */
     protected $start;
 
     /**
-     * @var \Datetime
+     * @var Datetime
      */
     protected $end;
 
@@ -30,11 +32,11 @@ class CalendarEvent extends EventDispatcher
     protected $events = [];
 
     /**
-     * @param \Datetime $start
-     * @param \Datetime $end
+     * @param Datetime $start
+     * @param Datetime $end
      * @param array $filters
      */
-    public function __construct(\Datetime $start, \Datetime $end, array $filters)
+    public function __construct(Datetime $start, Datetime $end, array $filters)
     {
         $this->start = $start;
         $this->end = $end;
@@ -42,7 +44,7 @@ class CalendarEvent extends EventDispatcher
     }
 
     /**
-     * @return \Datetime
+     * @return Datetime
      */
     public function getStart()
     {
@@ -50,7 +52,7 @@ class CalendarEvent extends EventDispatcher
     }
 
     /**
-     * @return \Datetime
+     * @return Datetime
      */
     public function getEnd()
     {
@@ -66,11 +68,11 @@ class CalendarEvent extends EventDispatcher
     }
 
     /**
-     * @param Event $event
+     * @param EventInterface $event
      *
      * @return $this
      */
-    public function addEvent(Event $event)
+    public function addEvent(EventInterface $event)
     {
         if (!in_array($event, $this->events, true)) {
             $this->events[] = $event;
@@ -80,7 +82,7 @@ class CalendarEvent extends EventDispatcher
     }
 
     /**
-     * @return Event[]
+     * @return EventInterface[]
      */
     public function getEvents()
     {
